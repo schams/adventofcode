@@ -10,7 +10,7 @@ public class AoC20242 {
         ArrayList<Integer> left = new ArrayList();
         ArrayList<Integer> right = new ArrayList();
         try {
-            String input = Files.readString(Path.of("input1-0.txt"));
+            String input = Files.readString(Path.of("input1.txt"));
             for( String line : input.split("\n") ) {
                     String[] pair = line.split("\\s+");
                     if( pair.length == 2 ) {
@@ -19,23 +19,19 @@ public class AoC20242 {
                     }
             };
 
-            left.sort(null);
             right.sort(null);
-            int similarityScore = left.stream().map( number -> {
-                int leftOccurrances = 1;
-                int i=left.indexOf(number);
-                while( ++i < left.size() && left.get(i) == number ) {
-                    leftOccurrances++;
-                }
+            int similarityScore = left.stream().map( leftNumber -> {
                 int rightOccurrances = 0;
-                i=right.indexOf(number);
+                int i=right.indexOf(leftNumber);
                 if( i >= 0 ) {
-                    while( right.get(i++) == number ) {
+                    System.out.println( leftNumber + " found in right at " + i + "= " + right.get(i));
+                    while( right.get(i).equals(leftNumber) ) {
                         rightOccurrances++;
+                        i++;
                     }
                 }
-                System.out.println( number + "has " + leftOccurrances + " in left and " + rightOccurrances + " in right");
-                return leftOccurrances * rightOccurrances;
+                System.out.println( leftNumber + "has " + rightOccurrances + " in right");
+                return leftNumber * rightOccurrances;
             }).reduce(0, (acc, score) -> {
                 return acc + score;
             });
