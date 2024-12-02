@@ -16,10 +16,17 @@ public class AoC20243 {
             String input = Files.readString(Path.of("input3.txt"));
             for( String line : input.split("\n") ) {
                 ArrayList<Integer> levels = new ArrayList<>(Arrays.stream(line.split("\\s+")).map( inputLevel -> Integer.parseInt(inputLevel)).collect(Collectors.toList()));
+                if( levels.size() == 1 ) {
+                    safeReports++;
+                    continue;
+                }
+                if( levels.get(0) == levels.get(1) ) {
+                    continue;
+                }
                 boolean isDescending = levels.get(0) > levels.get(1);
                 boolean isSafe = true;
                 if( isDescending ) {
-                    for( int i = 2; i < levels.size(); i++ ) {
+                    for( int i = 1; i < levels.size(); i++ ) {
                         int change = levels.get(i-1) - levels.get(i);
                         if(  change < 1 || change > 3 ) {
                             isSafe = false;
@@ -27,7 +34,7 @@ public class AoC20243 {
                         }
                     }
                 } else {
-                    for( int i = 2; i < levels.size(); i++ ) {
+                    for( int i = 1; i < levels.size(); i++ ) {
                         int change = levels.get(i) - levels.get(i-1);
                         if(  change < 1 || change > 3 ) {
                             isSafe = false;
