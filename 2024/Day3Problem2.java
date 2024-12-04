@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3Problem2 {
-    public static enum TokenType {
+    public enum TokenType {
         MUL ("mul\\((\\d{1,3}),(\\d{1,3})\\)"),
         DONT ("don't\\(\\)"),
         DO ("do\\(\\)");
