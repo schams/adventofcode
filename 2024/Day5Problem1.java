@@ -24,6 +24,10 @@ public class Day5Problem1 {
                 }
             }
 
+            for(Integer key: notAllowedAfter.keySet()) {
+                System.out.println("notAllowedAfter.get(" + key + "): " + notAllowedAfter.get(key));
+            }
+
             for( i++; i < input.length; i++) {
                 String update = input[i];
                 List<Integer> pages = Arrays.stream(update.split(",")).map(page-> Integer.parseInt(page.trim())).toList();
